@@ -586,6 +586,10 @@ to preserve the formatting in a displayed table, for example."
   :group 'org-drill
   :type 'boolean)
 
+(defcustom org-drill-typing-buffer-height
+  10
+  "width for org drill typing buffer")
+
 (defvar-local org-drill-response-associated-buffer nil)
 
 (defclass org-drill-session ()
@@ -1792,6 +1796,16 @@ Consider reformulating the item to make it easier to remember.\n"
   (oset org-drill-current-session exit-kind 'tags)
   (org-drill-response-complete))
 
+(defun org-drill-set-buffer-height (height)
+  "Set the height of the org-drill buffer to HEIGHT."
+  (let ((window-size-fixed)
+        (h (max height window-min-height)))
+    (cond
+     ((> (window-height) h)
+      (shrink-window (- (window-height) h)))
+     ((< (window-height) h)
+      (enlarge-window (- h (window-height)))))))
+
 (defun org-drill-response-get-buffer-create ()
   (let ((local-current-input-method
          current-input-method)
@@ -1832,6 +1846,7 @@ Consider reformulating the item to make it easier to remember.\n"
              (org-drill-response-get-buffer-create)))
         (select-window
          (display-buffer-below-selected buf nil))
+        (org-drill-set-buffer-height org-drill-typing-buffer-height)
         ;; Store the current session in a variable, so that it can
         ;; be picked up by the when we leave the buffer
         (setq-local org-drill-current-session session)
