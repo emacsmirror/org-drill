@@ -2715,7 +2715,7 @@ all the markers used by Org-Drill will be freed."
                                  lapsed-days))
                   (oref session overdue-data))))
     (setf (oref session overdue-entries)
-          (mapcar 'first
+         (mapcar 'cl-first
                   (append
                    (sort (org-drill-shuffle not-lapsed)
                          (lambda (a b) (> (cl-second a) (cl-second b))))
