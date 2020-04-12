@@ -5,7 +5,7 @@
 ;; Maintainer: Phillip Lord <phillip.lord@russet.org.uk>
 ;; Author: Paul Sexton <eeeickythump@gmail.com>
 ;; Version: 2.7.0
-;; Package-Requires: ((emacs "25.3") (seq "2.14") (org "9.2.4") (persist "0.3"))
+;; Package-Requires: ((emacs "25.3") (seq "2.14") (org "9.3") (persist "0.3"))
 ;; Keywords: games, outlines, multimedia
 
 ;; URL: https://gitlab.com/phillord/org-drill/issues
