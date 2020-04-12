@@ -55,18 +55,25 @@
 
 (run-with-timer 1 1 #'robot-dump-messages)
 
-(defun robot-check-cards-seen-and-die (n)
+(defun robot-check-cards-seen (n)
+  "N is number of cards we expect to have seen this session.
+Returns a number representing an exit status code"
   (if (= n org-drill-cards-in-this-emacs)
       (progn
         (princ
          (format "Succeeded: Saw %s cards as expected\n" n)
          'external-debugging-output)
-        (kill-emacs 0))
-    (princ
-     (format "Failed: Saw %s cards, expecting %s\n"
-             org-drill-cards-in-this-emacs n)
-     'external-debugging-output)
-    (kill-emacs -1)))
+        0)
+    (progn
+      (princ
+       (format "Failed: Saw %s cards, expecting %s\n"
+               org-drill-cards-in-this-emacs n)
+       'external-debugging-output)
+      -1)))
+
+(defun robot-check-cards-seen-and-die (n)
+  "N is number of cards we expect to have seen this session."
+  (kill-emacs (robot-check-cards-seen n)))
 
 ;; Move the package-user-dir somewhere local
 (require 'package)

@@ -2855,7 +2855,7 @@ STATUS is one of the following values:
     (setf (oref session warned-about-id-creation) t))
   (org-id-get-create))
 
-(defun org-drill (&optional scope drill-match resume-p)
+(defun org-drill (&optional scope drill-match resume-p cram)
   "Begin an interactive 'drill session'. The user is asked to
 review a series of topics (headers). Each topic is initially
 presented as a 'question', often with part of the topic content
@@ -2888,7 +2888,10 @@ todo query. Only items matching the query will be considered.
 It accepts the same values as `org-drill-match', which see.
 
 If RESUME-P is non-nil, resume a suspended drill session rather
-than starting a new one."
+than starting a new one.
+
+CRAM, if non-nil, will start a new session in cram mode. If
+resuming a suspended session, this parameter is ignored."
 
   (interactive)
   ;; Check org version. Org 7.9.3f introduced a backwards-incompatible change
@@ -2909,7 +2912,8 @@ work correctly with older versions of org mode. Your org mode version (%s) appea
     (cl-block org-drill
       (unless resume-p
         (org-drill-free-markers session t)
-        (setf (oref session current-item) nil
+        (setf (oref session cram-mode) cram
+              (oref session current-item) nil
               (oref session done-entries) nil
               (oref session dormant-entry-count) 0
               (oref session due-entry-count) 0
@@ -2980,8 +2984,7 @@ all drill items are considered to be due for review, unless they
 have been reviewed within the last `org-drill-cram-hours'
 hours."
   (interactive)
-  (setq (oref session cram-mode) t)
-  (org-drill scope drill-match))
+  (org-drill scope drill-match nil t))
 
 (defun org-drill-cram-tree ()
   "Run  an interactive drill session in 'cram mode' using subtree at point.
