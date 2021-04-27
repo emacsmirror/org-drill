@@ -2855,6 +2855,7 @@ STATUS is one of the following values:
     (setf (oref session warned-about-id-creation) t))
   (org-id-get-create))
 
+;;;###autoload
 (defun org-drill (&optional scope drill-match resume-p cram)
   "Begin an interactive 'drill session'. The user is asked to
 review a series of topics (headers). Each topic is initially
@@ -2978,6 +2979,7 @@ work correctly with older versions of org mode. Your org mode version (%s) appea
       (message nil)
       ))))
 
+;;;###autoload
 (defun org-drill-cram (&optional scope drill-match)
   "Run an interactive drill session in 'cram mode'. In cram mode,
 all drill items are considered to be due for review, unless they
@@ -3005,6 +3007,7 @@ files in the same directory as the current file."
   (interactive)
   (org-drill 'directory))
 
+;;;###autoload
 (defun org-drill-again (&optional scope drill-match)
   "Run a new drill session, but try to use leftover due items that
 were not reviewed during the last session, rather than scanning for
