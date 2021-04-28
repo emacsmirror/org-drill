@@ -1,5 +1,9 @@
 #!/bin/sh
 
+git clone https://github.com/cask/cask ~/.cask
+export PATH=$HOME/.cask/bin:$PATH
+
+
 cd ..
 mkdir copy
 cd copy

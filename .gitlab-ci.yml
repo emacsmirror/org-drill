@@ -2,4 +2,5 @@ image: "silex/emacs:27.2-dev"
 
 test:
   script:
-    - make test
+    - git clone https://github.com/cask/cask ~/.cask
+    - PATH=$HOME/.cask/bin:$PATH make test

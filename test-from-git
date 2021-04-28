@@ -1,7 +1,12 @@
 #!/bin/sh
 
+git clone https://github.com/cask/cask ~/.cask
+export PATH=$HOME/.cask/bin:$PATH
+
 cd ..
 mkdir git
 cd git
 git clone ../app .
+
+
 make test

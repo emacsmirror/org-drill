@@ -35,10 +35,10 @@ test-git:
 	docker run -it --rm --name docker-git -v $(PWD):/usr/src/app -w /usr/src/app --entrypoint=/bin/bash  silex/emacs:$(DOCKER_TAG)-dev ./test-from-git
 
 docker-test:
-	$(MAKE) test-git DOCKER_TAG=26.2
-	$(MAKE) test-cp DOCKER_TAG=26.2
-	$(MAKE) test-git DOCKER_TAG=25.3
-	$(MAKE) test-cp DOCKER_TAG=25.3
+	$(MAKE) test-git DOCKER_TAG=27.2
+	$(MAKE) test-cp DOCKER_TAG=27.2
+	$(MAKE) test-git DOCKER_TAG=26.3
+	$(MAKE) test-cp DOCKER_TAG=26.3
 
 clean-elc:
 	$(CASK) clean-elc
