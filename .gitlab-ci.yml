@@ -1,4 +1,4 @@
-image: "silex/emacs:26.2-dev"
+image: "silex/emacs:27.2-dev"
 
 test:
   script:
